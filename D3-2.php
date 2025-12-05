@@ -244,5 +244,5 @@ function iterate_inputs(array $arr, int $lim): void
   }
 }
 
-iterate_inputs($input, 2);
+iterate_inputs($input, 12);
 var_dump($counter);
