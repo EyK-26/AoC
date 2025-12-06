@@ -207,15 +207,15 @@ $counter = 0;
 $offset = $offset_org = 0;
 $str = "";
 
-function inner_cb(array $array): void
+function inner_cb(string $string): void
 {
   global $str, $offset, $offset_org, $counter;
   $num = 0;
-  $lim = count($array) - $offset;
+  $lim = strlen($string) - $offset;
   $pos = 0;
 
-  for ($i = 0; $i < count($array); $i++) {
-    $val = intval($array[$i]);
+  for ($i = 0; $i < strlen($string); $i++) {
+    $val = intval($string[$i]);
     if ($val > $num && $i <= $lim) {
       $num = $val;
       $pos = $i;
@@ -225,7 +225,7 @@ function inner_cb(array $array): void
   $str .= strval($num);
   if (strlen($str) < $offset_org) {
     $offset--;
-    inner_cb(array_slice($array, $pos + 1));
+    inner_cb(substr($string, $pos + 1));
   } else {
     $counter += intval($str);
     $offset = $offset_org;
@@ -240,7 +240,7 @@ function iterate_inputs(array $arr, int $lim): void
   $offset_org = $offset;
 
   foreach ($arr as $val) {
-    inner_cb(str_split($val));
+    inner_cb($val);
   }
 }
 
