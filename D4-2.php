@@ -141,11 +141,11 @@ $input = [
 
 $total = 0;
 
-$init = function () use (&$input, &$total) {
+$init = function () use ($input, &$total) {
   $al = count($input);
 
   for ($i = 0; $i < $al; $i++) {
-    $str = &$input[$i];
+    $str = $input[$i];
     $sl = strlen($str);
 
     for ($k = 0; $k < $sl; $k++) {
