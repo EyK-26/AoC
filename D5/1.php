@@ -1,28 +1,25 @@
 <?php
 
 $input = require 'input.php';
-$ranges  = $input['ranges'];
+$ranges = $input['ranges'];
 $ids = $input['ids'];
-$ranges_demo  = $input['ranges_demo'];
-$ids_demo  = $input['ids_demo'];
-
-$pattern = '/(\d+)-(\d+)/';
 $total = 0;
+$isWithinRange = fn(int $number, int $min, int $max): bool => $number >= $min && $number <= $max;
+$found = [];
 
-for ($i = 0; $i < count($ranges_demo); $i++) {
-	preg_match($pattern, $ranges_demo[$i], $matches);
-	$start = intval($matches[1]);
-	$end = intval($matches[2]);
-	while ($start <= $end) {
-		if (array_any($ids_demo, fn(int $val) => $val === $start)) {
-			$ids_demo = array_filter($ids_demo, fn(int $val) => $val !== $start);
-			echo "found $start";
+for ($k = 0; $k < count($ids); $k++) {
+	$val = $ids[$k];
+	if (array_find($found, fn(int $num) => $val === $num)) {
+		continue;
+	}
+	for ($i = 0; $i < count($ranges); $i++) {
+		preg_match('/(\d+)-(\d+)/', $ranges[$i], $matches);
+		if ($isWithinRange($val, intval($matches[1]), intval($matches[2]))) {
+			array_push($found, $val);
 			$total++;
 			break;
 		}
-		$start++;
 	}
 }
-
 
 var_dump($total);
