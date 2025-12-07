@@ -1,6 +1,6 @@
 <?php
 
-$inputs = [
+return [
 	'R26',
 	'L12',
 	'L47',
@@ -4128,45 +4128,3 @@ $inputs = [
 	'L46',
 	'R18',
 ];
-
-$pattern = '/(R|L)(\d+)/';
-$position = 50;
-$prev_position = $position;
-$count = 0;
-
-$set_gauge = function (bool &$is_left, int &$value) {
-	global $position, $count, $prev_position;
-
-	$position = ($is_left ? $position - $value : $position + $value) % 100;
-
-	if ($position < 0) {
-		$position = 100 - abs($position);
-	}
-
-	if ($value > 99) {
-		$count += floor($value / 100);
-	}
-
-	if ($position === 0) {
-		$count++;
-	} else {
-		if ($prev_position > 0) {
-			if (!$is_left && $prev_position + ($value % 100) > 99) {
-				$count++;
-			} else if ($is_left && $prev_position - ($value % 100) < 0) {
-				$count++;
-			}
-		}
-	}
-
-	$prev_position = $position;
-};
-
-for ($i = 0; $i < count($inputs); $i++) {
-	preg_match($pattern, $inputs[$i], $matches);
-	$is_left = $matches[1] === 'L';
-	$value = intval($matches[2]);
-	$set_gauge($is_left, $value);
-};
-
-print_r($count);
