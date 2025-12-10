@@ -37,7 +37,7 @@ $set_gauge = function (bool &$is_left, int &$value) {
 for ($i = 0; $i < count($input); $i++) {
 	preg_match($pattern, $input[$i], $matches);
 	$is_left = $matches[1] === 'L';
-	$value = intval($matches[2]);
+	$value = $matches[2];
 	$set_gauge($is_left, $value);
 };
 

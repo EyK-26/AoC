@@ -10,8 +10,8 @@ $init = function () use (&$ranges, &$count) {
 	for ($i = 0; $i < $len; $i++) {
 		preg_match("/(\d+)-(\d+)/", $ranges[$i], $matches);
 		$ranges[$i] = [
-			"start" => intval($matches[1]),
-			"end" => intval($matches[2]),
+			"start" => $matches[1],
+			"end" => $matches[2],
 		];
 	}
 
@@ -29,5 +29,4 @@ $init = function () use (&$ranges, &$count) {
 };
 
 $init();
-var_dump($ranges);
 var_dump($count);

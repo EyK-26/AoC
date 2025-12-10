@@ -31,8 +31,8 @@ $count_seq = function (int $start, int $end) {
 
 for ($i = 0; $i < count($input); $i++) {
 	preg_match($pattern, $input[$i], $matches);
-	$start = intval($matches[1]);
-	$end = intval($matches[2]);
+	$start = $matches[1];
+	$end = $matches[2];
 	$count_seq($start, $end);
 }
 

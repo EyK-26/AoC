@@ -13,7 +13,7 @@ function inner_cb(string $string): void
 	$pos = 0;
 
 	for ($i = 0; $i < strlen($string); $i++) {
-		$val = intval($string[$i]);
+		$val = $string[$i];
 		if ($val > $num && $i <= $lim) {
 			$num = $val;
 			$pos = $i;
@@ -25,7 +25,7 @@ function inner_cb(string $string): void
 		$offset--;
 		inner_cb(substr($string, $pos + 1));
 	} else {
-		$counter += intval($str);
+		$counter += $str;
 		$offset = $offset_org;
 		$str = "";
 	}
