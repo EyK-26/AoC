@@ -13,8 +13,8 @@ $input_demo = "123 328  51 64
 $signs_demo = "*   +   *   +";
 
 return [
-  'input' => $input,
-  'signs' => $signs,
-  'input_demo' => $input_demo,
-  'signs_demo' => $signs_demo,
+    'input'      => $input,
+    'signs'      => $signs,
+    'input_demo' => $input_demo,
+    'signs_demo' => $signs_demo,
 ];
