@@ -40,7 +40,7 @@ function get_count(array $buttons, string $positions): int
     }
 
     $arr = array_unique(str_split($output));
-    natsort($arr);
+    sort($arr);
     if (implode('', $arr) === $positions) {
         return count($buttons);
     }
@@ -62,6 +62,10 @@ $init = function (array $inputs) use (&$total) {
         $first = true;
         foreach (generate_subsets($t[0]) as $subset) {
             $res = get_count($subset, $positions);
+            if ($count === 1) {
+                break;
+            }
+
             if ($res > 0) {
                 if ($first) {
                     $count = $res;
